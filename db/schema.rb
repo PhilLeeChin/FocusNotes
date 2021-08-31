@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2021_08_27_011910) do
   create_table "notepads", force: :cascade do |t|
     t.string "title"
     t.string "note"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -23,7 +24,6 @@ ActiveRecord::Schema.define(version: 2021_08_27_011910) do
     t.string "name"
     t.string "username"
     t.string "password_digest"
-    t.integer "inkpad_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

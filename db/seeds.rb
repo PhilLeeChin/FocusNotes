@@ -9,5 +9,7 @@
 # User.create!(name: 'Philip', username: 'pleechin', password: 'checksum')
 philip = User.first
 
-Notepad.create!(title: 'Feed Rex', note: 'Remember to feed Rex at 10:30AM.')
+# User.create!(name: 'Lee', username: 'lee', password: 'checksum2')
+
+Notepad.create!(title: 'Feed Rex', note: 'Remember to feed Rex at 10:30AM.', user_id: '1')
 

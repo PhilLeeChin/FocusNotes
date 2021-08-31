@@ -1,5 +1,5 @@
 class UserSerializer
   include FastJsonapi::ObjectSerializer
   attributes :name, :username
-  belongs_to :inkpad
+  # has_many :notepads, serializer: NotepadSerializer
 end

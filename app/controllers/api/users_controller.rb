@@ -18,11 +18,17 @@ class Api::UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
+    @notepad = Notepad.find_or_create_by(title: params[:user][:title], note: params[:user][:note])
 
+    @user.inkpad = @notepad
     if @user.save
-      render json: @user, status: :created, location: @user
+      sessions[:user_id] = @user.id
+      render json: UserSerializer.new(@user), status: created
     else
-      render json: @user.errors, status: :unprocessable_entity
+      resp = {
+        error: @user.errors.full_messages.to_sentence
+      }
+      render json: resp, status: :unprocessable_entity
     end
   end
 
