@@ -8,20 +8,20 @@ class Api::UsersController < ApplicationController
     render json: @users
   end
 
-  # GET /users/1
-  def show
-    # render json: @user
-    user_json = UserSerializer.new(@user).serialized_json
-    render json: user_json
-  end
+  # # GET /users/1
+  # def show
+  #   # render json: @user
+  #   user_json = UserSerializer.new(@user).serialized_json
+  #   render json: user_json
+  # end
 
   # POST /users
   def create
     @user = User.new(user_params)
-    @notepad = Notepad.find_or_create_by(title: params[:user][:title], note: params[:user][:note])
+    # @notepad = Notepad.find_or_create_by(title: params[:user][:title], note: params[:user][:note])
 
-    @user.inkpad = @notepad
-    if @user.save
+    # @user.inkpad = @notepad
+    if @user.valid? && @user.save
       sessions[:user_id] = @user.id
       render json: UserSerializer.new(@user), status: created
     else
