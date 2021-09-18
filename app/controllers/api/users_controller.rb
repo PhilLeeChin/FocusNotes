@@ -8,12 +8,12 @@ class Api::UsersController < ApplicationController
     render json: @users
   end
 
-  # # GET /users/1
-  # def show
-  #   # render json: @user
-  #   user_json = UserSerializer.new(@user).serialized_json
-  #   render json: user_json
-  # end
+  # GET /users/1
+  def show
+    # render json: @user
+    user_json = UserSerializer.new(@user).serialized_json
+    render json: user_json
+  end
 
   # POST /users
   def create
@@ -21,7 +21,7 @@ class Api::UsersController < ApplicationController
     # @notepad = Notepad.find_or_create_by(title: params[:user][:title], note: params[:user][:note])
 
     # @user.inkpad = @notepad
-    if @user.valid? && @user.save
+    if @user.save
       sessions[:user_id] = @user.id
       render json: UserSerializer.new(@user), status: created
     else
@@ -48,12 +48,13 @@ class Api::UsersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:name, :username, :password_digest)
-    end
+  # Only allow a list of trusted parameters through.
+  def user_params
+    # binding.pry
+    params.fetch(:user, {}).permit(:name, :username, :password)      
+  end
 end
