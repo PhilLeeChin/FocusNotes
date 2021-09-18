@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  get "/api/login", to: "api/sessions#new"
   post "/api/login", to: "api/sessions#create"
-  post "/api/signup", to: "api/user#create"
+  get "/api/signup", to: "api/users#create"
   delete "/api/logout", to: "api/sessions#destroy"
   get "/api/get_current_user", to: "api/sessions#get_current_user"
   
