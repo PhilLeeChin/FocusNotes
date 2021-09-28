@@ -22,8 +22,8 @@ class Api::UsersController < ApplicationController
 
     # @user.inkpad = @notepad
     if @user.save
-      sessions[:user_id] = @user.id
-      render json: UserSerializer.new(@user), status: created
+      session[:user_id] = @user.id
+      render json: UserSerializer.new(@user), status: :created
     else
       resp = {
         error: @user.errors.full_messages.to_sentence
